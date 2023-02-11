@@ -1,0 +1,103 @@
+<app-navigation></app-navigation>
+<div class="row">
+  <div class="col-6 m-auto">
+    <div class="card m-auto">
+      <div class="card-header text-center">New User</div>
+      <div class="card-body">
+        <form
+          [formGroup]="formData"
+          (ngSubmit)="onSubmit(userPost.value)"
+          #userPost="ngForm"
+        >
+          <div class="form-group col-12">
+            <label for="id" class="form-label">ID</label>
+            <input
+              type="number"
+              class="form-control"
+              formControlName="id"
+              maxlength="6"
+              min="1"
+              max="999999"
+              ngModel
+            />
+            <span
+              class="error-block"
+              *ngIf="!id.valid && (id.touched || userSubmited)"
+              >Please provide id with 6 digits</span
+            >
+          </div>
+
+          <div class="form-group col-12">
+            <label for="name" class="form-label">Name</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              ngModel
+            />
+            <span
+              class="error-block"
+              *ngIf="!name.valid && (name.touched || userSubmited)"
+              >Please provide name</span
+            >
+          </div>
+
+          <div class="form-group col-12">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="email"
+              ngModel
+            />
+            <span
+              class="error-block"
+              *ngIf="!email.valid && (email.touched || userSubmited)"
+            >
+              <span *ngIf="email.hasError('required')"
+                >Please provide email id</span
+              >
+              <span *ngIf="email.hasError('email')"
+                >Please provide valid email id</span
+              >
+            </span>
+          </div>
+
+          <div class="form-group col-12">
+            <label for="gender" class="form-label">Gender</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="gender"
+              ngModel
+            />
+            <span
+              class="error-block"
+              *ngIf="!gender.valid && (gender.touched || userSubmited)"
+              >Please provide gender</span
+            >
+          </div>
+
+          <div class="form-group col-12">
+            <div class="custom-control custom-switch">
+              <input
+                type="checkbox"
+                class="custom-control-input"
+                id="customSwitch1"
+                formControlName="status"
+                ngModel
+              />
+              <label class="custom-control-label" for="customSwitch1"
+                >Status</label
+              >
+            </div>
+          </div>
+
+          <div class="form-group col-12 text-center mt-3">
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
