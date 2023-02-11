@@ -1,6 +1,5 @@
-import { Component, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
+import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -14,47 +13,68 @@ import { filter } from 'rxjs';
   templateUrl: './new-user.component.html',
   styleUrls: ['./new-user.component.css'],
 })
-export class NewUserComponent {
+export class NewUserComponent implements OnInit {
   formData: FormGroup;
   userSubmited: Boolean;
-
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
-  // validations of form
+  ngOnInit() {
+    this.createRegForm();
+    // for keeping form data intact
+    let draft = window.localStorage.getItem('step');
+    console.log(draft);
+    let newDraft: any = {};
+    if (draft) {
+      newDraft = JSON.parse(draft);
+      console.log(this.formData);
+      if (newDraft['status'] !== null) {
+        let status = newDraft['status'] === 'Active' ? true : false;
+        newDraft = { ...newDraft, status: status };
+      } else {
+        newDraft = { ...newDraft, status: 'NotActive' };
+      }
+      this.formData.setValue(newDraft);
+    }
 
+    this.formData.valueChanges
+      .pipe(filter(() => this.formData.valid))
+      .subscribe((val) => {
+        val = this.updateActiveStatus(val);
+        window.localStorage.setItem('step', JSON.stringify(val));
+      });
+  }
+  // for updating active status
+  updateActiveStatus(value: any) {
+    if (value['status'] !== null) {
+      let status = value['status'] === true ? 'Active' : 'NotActive';
+      let newData: any = { ...value, status: status };
+      console.log({ newData });
+      value = { ...newData };
+    } else {
+      value = { ...value, status: 'NotActive' };
+    }
+    return value;
+  }
+  // creating form validators
   createRegForm() {
     this.formData = this.fb.group({
       id: [null, [Validators.required, Validators.maxLength(6)]],
       name: [null, Validators.required],
       email: [null, [Validators.required, Validators.email]],
       gender: [null, Validators.required],
+      status: [null],
     });
   }
-
-  ngOnInit() {
-    this.createRegForm();
-
-    let draft = window.localStorage.getItem('step');
-    console.log(draft);
-    if (draft) {
-      console.log(this.formData);
-      this.formData.setValue(JSON.parse(draft));
-    }
-
-    this.formData.valueChanges
-      .pipe(filter(() => this.formData.valid))
-      .subscribe((val) =>
-        window.localStorage.setItem('step', JSON.stringify(val))
-      );
-  }
-  // post data
-
   onSubmit(data: any) {
     // for posting the data to custom endpoint
-    // console.log(data);
-    this.http.post('http://localhost:4200/public', data);
+    data = this.updateActiveStatus(data);
+    this.http
+      .post('https://hplkc8.deta.dev/public/v1/user', data)
+      .subscribe((response: any) => {
+        console.log(response);
+      });
 
-    // for resetting the form data after submission
+    // for checking whether user has entered all text before submitting
     this.userSubmited = true;
     if (this.formData.valid) {
       this.userSubmited = false;

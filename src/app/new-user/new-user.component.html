@@ -6,7 +6,7 @@
       <div class="card-body">
         <form
           [formGroup]="formData"
-          (ngSubmit)="onSubmit(userPost.value)"
+          (ngSubmit)="onSubmit(formData.value)"
           #userPost="ngForm"
         >
           <div class="form-group col-12">
@@ -18,7 +18,6 @@
               maxlength="6"
               min="1"
               max="999999"
-              ngModel
             />
             <span
               class="error-block"
@@ -29,12 +28,7 @@
 
           <div class="form-group col-12">
             <label for="name" class="form-label">Name</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="name"
-              ngModel
-            />
+            <input type="text" class="form-control" formControlName="name" />
             <span
               class="error-block"
               *ngIf="!name.valid && (name.touched || userSubmited)"
@@ -44,12 +38,7 @@
 
           <div class="form-group col-12">
             <label for="email" class="form-label">Email</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="email"
-              ngModel
-            />
+            <input type="text" class="form-control" formControlName="email" />
             <span
               class="error-block"
               *ngIf="!email.valid && (email.touched || userSubmited)"
@@ -65,12 +54,7 @@
 
           <div class="form-group col-12">
             <label for="gender" class="form-label">Gender</label>
-            <input
-              type="text"
-              class="form-control"
-              formControlName="gender"
-              ngModel
-            />
+            <input type="text" class="form-control" formControlName="gender" />
             <span
               class="error-block"
               *ngIf="!gender.valid && (gender.touched || userSubmited)"
@@ -85,14 +69,12 @@
                 class="custom-control-input"
                 id="customSwitch1"
                 formControlName="status"
-                ngModel
               />
               <label class="custom-control-label" for="customSwitch1"
                 >Status</label
               >
             </div>
           </div>
-
           <div class="form-group col-12 text-center mt-3">
             <button type="submit" class="btn btn-primary">Submit</button>
           </div>
