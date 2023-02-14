@@ -4,3 +4,9 @@
 .error-block {
   color: red;
 }
+
+@media (max-width: 770px) {
+  #width {
+    width: 80%;
+  }
+}
