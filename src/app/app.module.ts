@@ -13,12 +13,10 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 // Routes for the app
-let domainName = '';
-if (location.hostname !== 'localhost') domainName = 'finalproject/';
 
 const appRoute: Routes = [
   { path: '', component: HomeComponent },
-  { path: domainName + 'NewUser', component: NewUserComponent },
+  { path: 'NewUser', component: NewUserComponent },
 ];
 
 @NgModule({
