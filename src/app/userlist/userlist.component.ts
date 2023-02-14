@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment.prod';
 })
 export class UserlistComponent {
   posts: any[] = [];
+  mobile: boolean = true;
   private GET_API_URL = environment.GET_API_URL;
 
   // Loading user data using get request
@@ -16,6 +17,8 @@ export class UserlistComponent {
   constructor(private http: HttpClient) {
     this.loadPosts();
   }
+
+  ngOnInit() {}
 
   loadPosts() {
     this.http.get(this.GET_API_URL).subscribe(

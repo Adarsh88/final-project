@@ -1,31 +1,56 @@
 <div class="container">
   <div class="col-md-12 ms-sm-auto col-lg-12 px-md-4 w-100">
-    <h2 class="text-center">Users List</h2>
-    <div class="row mb-3">
-      <div class="col-md-2 themed-grid-col text-center">ID</div>
-      <div class="col-md-2 themed-grid-col text-center">NAME</div>
-      <div class="col-md-4 themed-grid-col text-center">EMAIL</div>
-      <div class="col-md-2 themed-grid-col text-center">GENDER</div>
-      <div class="col-md-2 themed-grid-col text-center">STATUS</div>
+    <div class="text-right p-2">
+      <h2 class="text-center mt-5">Users List</h2>
+      <a class="btn btn-primary text-end" routerLink="NewUser" role="button"
+        >New User</a
+      >
+    </div>
+    <div id="name-list">
+      <div class="row mb-3">
+        <div class="col-md-2 themed-grid-col text-center bg-light">ID</div>
+        <div class="col-md-2 themed-grid-col text-center bg-light">NAME</div>
+        <div class="col-md-4 themed-grid-col text-center bg-light">EMAIL</div>
+        <div class="col-md-2 themed-grid-col text-center bg-light">GENDER</div>
+        <div class="col-md-2 themed-grid-col text-center bg-light">STATUS</div>
+      </div>
+    </div>
+    <div class="row mb-3" id="user-list">
+      <div class="col-md-2 themed-grid-col text-center bg-light">NAME</div>
     </div>
   </div>
   <div
+    id="name-list"
     *ngFor="let post of posts"
-    class="col-md-12 ms-sm-auto col-lg-12 px-md-4 w-100"
+    class="col-md-12 ms-sm-auto col-lg-12 px-md-4 w-200"
   >
-    <div class="row mb-2">
-      <div class="col-md-2 themed-grid-col text-center">{{ post.id }}</div>
-      <div class="col-md-2 themed-grid-col text-center">{{ post.name }}</div>
-      <div class="col-md-4 themed-grid-col text-center">{{ post.email }}</div>
-      <div class="col-md-2 themed-grid-col text-center">
+    <div class="row">
+      <div class="col-md-2 themed-grid-col text-center bg-light">
+        {{ post.id }}
+      </div>
+      <div class="col-md-2 themed-grid-col text-center bg-light">
+        {{ post.name }}
+      </div>
+      <div class="col-md-4 themed-grid-col text-center bg-light">
+        {{ post.email }}
+      </div>
+      <div class="col-md-2 themed-grid-col text-center bg-light">
         {{ post.gender }}
       </div>
-      <div class="col-md-2 themed-grid-col text-center">
+      <div class="col-md-2 themed-grid-col text-center bg-light">
         {{ post.status }}
       </div>
     </div>
   </div>
-  <div class="text-center">
-    <a class="btn btn-primary" routerLink="NewUser" role="button">New User</a>
+  <div
+    id="user-list"
+    *ngFor="let post of posts"
+    class="col-md-12 ms-sm-auto col-lg-12 px-md-4 w-100"
+  >
+    <div class="row">
+      <div class="col-md-2 themed-grid-col text-center bg-light">
+        {{ post.name }}
+      </div>
+    </div>
   </div>
 </div>
