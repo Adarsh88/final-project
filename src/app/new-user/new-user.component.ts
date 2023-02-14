@@ -7,6 +7,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { filter } from 'rxjs';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-new-user',
@@ -16,6 +17,8 @@ import { filter } from 'rxjs';
 export class NewUserComponent implements OnInit {
   formData: FormGroup;
   userSubmited: Boolean;
+  private POST_API_URL = environment.POST_API_URL;
+
   constructor(private fb: FormBuilder, private http: HttpClient) {}
 
   ngOnInit() {
@@ -68,11 +71,9 @@ export class NewUserComponent implements OnInit {
   onSubmit(data: any) {
     // for posting the data to custom endpoint
     data = this.updateActiveStatus(data);
-    this.http
-      .post('https://hplkc8.deta.dev/public/v1/user', data)
-      .subscribe((response: any) => {
-        console.log(response);
-      });
+    this.http.post(this.POST_API_URL, data).subscribe((response: any) => {
+      console.log(response);
+    });
 
     // for checking whether user has entered all text before submitting
     this.userSubmited = true;

@@ -13,15 +13,13 @@ export class AppComponent {
 
   // Internet Connection validation
 
-  constructor(private connectionService: ConnectionService) {
-    this.connectionService.monitor().subscribe((isConnected) => {
-      this.isConnected = isConnected.hasInternetAccess;
-      if (this.isConnected) {
-        this.status = 'The web-app is online';
-      } else {
-        this.status = 'The web-app is offline';
-      }
-      alert(this.status);
-    });
-  }
+  // constructor(private connectionService: ConnectionService) {
+  //   this.connectionService.monitor().subscribe((isConnected) => {
+  //     this.isConnected = isConnected.hasInternetAccess;
+  //     if (!this.isConnected) {
+  //       this.status = 'The web-app is offline';
+  //     }
+  //     alert(this.status);
+  //   });
+  // }
 }

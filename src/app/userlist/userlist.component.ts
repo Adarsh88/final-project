@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-userlist',
@@ -8,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserlistComponent {
   posts: any[] = [];
+  private GET_API_URL = environment.GET_API_URL;
 
   // Loading user data using get request
 
@@ -16,7 +18,7 @@ export class UserlistComponent {
   }
 
   loadPosts() {
-    this.http.get('https://gorest.co.in/public/v2/users').subscribe(
+    this.http.get(this.GET_API_URL).subscribe(
       (posts: any) => {
         this.posts = posts;
       },
