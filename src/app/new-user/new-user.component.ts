@@ -25,11 +25,9 @@ export class NewUserComponent implements OnInit {
     this.createRegForm();
     // for keeping form data intact
     let draft = window.localStorage.getItem('step');
-    console.log(draft);
     let newDraft: any = {};
     if (draft) {
       newDraft = JSON.parse(draft);
-      console.log(this.formData);
       if (newDraft['status'] !== null) {
         let status = newDraft['status'] === 'Active' ? true : false;
         newDraft = { ...newDraft, status: status };
@@ -51,7 +49,6 @@ export class NewUserComponent implements OnInit {
     if (value['status'] !== null) {
       let status = value['status'] === true ? 'Active' : 'NotActive';
       let newData: any = { ...value, status: status };
-      console.log({ newData });
       value = { ...newData };
     } else {
       value = { ...value, status: 'NotActive' };

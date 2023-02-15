@@ -8,7 +8,7 @@ import { ConnectionService, ConnectionState } from 'ng-connection-service';
 })
 export class AppComponent {
   title = 'finalProject';
-  status = '';
+  status: boolean = false;
   isConnected: boolean = true;
 
   // Internet Connection validation
@@ -17,8 +17,7 @@ export class AppComponent {
     this.connectionService.monitor().subscribe((isConnected) => {
       this.isConnected = isConnected.hasInternetAccess;
       if (!this.isConnected) {
-        this.status = 'The web-app is offline';
-        alert(this.status);
+        this.status = true;
       }
     });
   }

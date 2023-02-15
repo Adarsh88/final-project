@@ -1,1 +1,25 @@
+<div class="text-center">
+  <div
+    class="toast show bg-danger"
+    role="alert"
+    aria-live="assertive"
+    aria-atomic="true"
+    id="toast"
+    *ngIf="this.status"
+  >
+    <div class="toast-header">
+      <strong class="me-auto">No Internet Connection</strong>
+      <small>1 mins ago</small>
+      <button
+        type="button"
+        class="btn-close"
+        data-bs-dismiss="toast"
+        aria-label="Close"
+      ></button>
+    </div>
+    <div class="toast-body">
+      There is no internet connection please check your connection
+    </div>
+  </div>
+</div>
 <router-outlet></router-outlet>

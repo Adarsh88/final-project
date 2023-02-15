@@ -18,8 +18,6 @@ export class UserlistComponent {
     this.loadPosts();
   }
 
-  ngOnInit() {}
-
   loadPosts() {
     this.http.get(this.GET_API_URL).subscribe(
       (posts: any) => {
